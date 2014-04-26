@@ -1,0 +1,32 @@
+% Ukrainian language
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{ukrainian}
+\setotherlanguage{english}
+\newfontfamily\cyrillicfont[Script=Cyrillic]{CMU Serif}
+\newfontfamily\cyrillicfontsf[Script=Cyrillic]{CMU Sans Serif}
+\newfontfamily\cyrillicfonttt[Script=Cyrillic]{CMU Typewriter Text}
+
+% Page setup
+\usepackage{vmargin}
+\setpapersize{A4}
+\setmarginsrb{2cm}{1.5cm}{1cm}{1.5cm}{0pt}{0mm}{0pt}{13mm}
+\renewcommand{\baselinestretch}{1.4}
+\sloppy
+
+% Useful packages
+\usepackage{amssymb, amsmath, amsfonts, cite, enumerate, float, indentfirst}
+
+% Bibliography
+\usepackage[nottoc,numbib]{tocbibind}
+\makeatletter
+\renewcommand{\@biblabel}[1]{#1.}
+\makeatother
+
+% Nice enumerations
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\arabic{enumi}}
+\renewcommand{\theenumii}{.\arabic{enumii}}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\renewcommand{\theenumiii}{.\arabic{enumiii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
