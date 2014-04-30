@@ -43,3 +43,10 @@
 \let\latex@numberline\numberline
 \def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
 \makeatother
+
+% Theorems
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem*{definition}{Означення}
+\newtheorem*{example}{Приклад}
+\newtheorem*{algorithm}{Алгоритм}
