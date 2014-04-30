@@ -1,4 +1,5 @@
 % Ukrainian language
+
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setmainlanguage{ukrainian}
@@ -15,18 +16,30 @@
 \sloppy
 
 % Useful packages
-\usepackage{amssymb, amsmath, amsfonts, cite, enumerate, float, indentfirst}
+\usepackage{amssymb, amsmath, amsfonts, enumerate, float, indentfirst}
 
 % Bibliography
-\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{cite}
+%\usepackage[nottoc, numbib]{tocbibind}
 \makeatletter
 \renewcommand{\@biblabel}[1]{#1.}
 \makeatother
 
-% Nice enumerations
+% Arabic enumerations
 \renewcommand{\theenumi}{\arabic{enumi}}
 \renewcommand{\labelenumi}{\arabic{enumi}}
 \renewcommand{\theenumii}{.\arabic{enumii}}
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
 \renewcommand{\theenumiii}{.\arabic{enumiii}}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
+
+% Hide sections numbers
+% http://tex.stackexchange.com/questions/80113/hide-section-numbers-but-keep-numbering
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
