@@ -41,7 +41,7 @@
     \item[Локальність.] Для всіх \(v \in V\) 
     \[\Delta_v^{t+1} = \Delta_v^{t+1}(x^0, x^1, \ldots, x^t) = \Delta_v^{t+1}(x_{\tilde{N}(v)}^0, x_{\tilde{N}(v)}^1, \ldots, x_{\tilde{N}(v)}^t)\]
     \begin{align*}
-    P(\xi_v^{t+1} = x_v\ &|\ \xi_{V\setminus\{v\}}^0 = x^0, \Delta_{V\setminus\{v\}}^0 = u^0,\ \ldots, \xi_{V\setminus\{v\}}^t = x^t, \Delta_{V\setminus\{v\}}^t = u^t) = \\
+    P(\xi_v^{t+1} = x_v\ &|\ \xi^0 = x^0, \Delta^0 = u^0,\ \ldots, \xi^t = x^t, \Delta^t = u^t) = \\
 	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^0 = x_{\tilde N(v)}^0, \Delta_{\tilde N(v)}^0 = u_{\tilde N(v)}^0,\ \ldots,\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t)
 	%= P(\xi_v^{t+1} = x_v\ |\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t)
 	\end{align*}
@@ -55,9 +55,9 @@
 	Припущення є реалістичним, оскільки, насправді, найважливішим є стан сусідніх агентів у попередній момент часу, тоді як повною історією їх рішень можна знехтувати.
 \end{description}
 
-Позначимо \(\delta := \{\delta_v\ |\ v \in V\}\), де \(\delta_v = \{\Delta_v^t, t \geq 0\}\)
+Позначимо \(\delta := \{\delta_v\ |\ v \in V\}\), де \(\delta_v = (\Delta_v^t\ |\  t=0,1,\ldots)\)
 
-З усіма вказаними припущеннями, визначена модель є Марківським випадковим полем з дискретним часом відносно графа взаємозв’язків \(G = (V, E)\), і керованого стохастичного процесу \((\xi, \delta)\) з локальною стратегією \(\delta\). Розглянемо цей клас об’єктів детальніше.
+З усіма вказаними припущеннями, визначена модель є Марківським випадковим полем з дискретним часом відносно графа взаємозв’язків \(G = (V, E)\), і керованого стохастичного процесу \((\xi, \delta)\) з локальною стратегією \(\delta\). Розглянемо це поняття детальніше.
 
 \subsection{Марківські випадкові поля}
 \begin{definition}
@@ -69,7 +69,7 @@
 Нехай \(\xi = \{\xi^t\ |\ t=0,1,\ldots\},\ \xi^t_v : (\Omega, \mathcal{F}, P) \rightarrow X_v,\ v \in V \) — марківський процес з дискретним часом. 
 Якщо виконуються:
 \begin{description}
-    \item[Локальність] \[P(\xi_v^{t+1} = x_v\ |\ \xi_v^0 = x^0, \xi_v^1 = x^1, \ldots, \xi_v^t = x^t) = P(\xi_v^{t+1} = x_v\ |\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t )\]
+    \item[Локальність] \[P(\xi_v^{t+1} = x_v\ |\ \xi^0 = x^0, \xi^1 = x^1, \ldots, \xi^t = x^t) = P(\xi_v^{t+1} = x_v\ |\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t )\]
     \item[Синхронність] \[P(\xi^{t+1}_K = x_K\ |\ \xi^t = x^t) = \prod_{k \in K} P(\xi^{t+1}_k = x_k\ |\ \xi^t = x^t), K \subset V\]
 
 Тоді процес \(\xi\) разом із графом \(G = (V, E)\) утворює \textit{Марківське випадкове поле із синхронними компонентами, що локально взаємодіють}, або просто \textit{Марківське випадкове поле з дискретним часом}.
@@ -87,6 +87,6 @@
 \nocite{Koller:2009}
 
 \bibliography{literature.bib}
-\bibliographystyle{abbrv}
+\bibliographystyle{ieeetr}
 
 \end{document}
