@@ -3,20 +3,30 @@ from pulp import (
     LpProblem, LpMinimize, LpMaximize, LpVariable, value)
 
 
-def find_optimal_strategy(states, controls, kernels, solver=None):
+def find_optimal_strategy(states, controls, costs, kernels, solver=None):
     """
     :param states: Number of system states (X)
     :param controls: Number of system controls (U)
     :param kernels: Transition kernels. Dimensionality X x X x U
     """
+    tolerance = 10e-15
+
     X = range(states)
     U = range(controls)
+    R = costs
     Q = kernels
 
-    tolerance = 10e-15
+    # Check costs
     # Check num of rows
-    assert(len(kernels) == states)
-    for row in kernels:
+    assert(len(R) == states)
+    for row in R:
+        # Check num of cols
+        assert(len(row) == controls)
+
+    # Check kernels
+    # Check num of rows
+    assert(len(Q) == states)
+    for row in Q:
         # Check num of cols
         assert(len(row) == states)
         for items in row:
@@ -39,7 +49,7 @@ def find_optimal_strategy(states, controls, kernels, solver=None):
         Z.extend(vars[x])
 
     # Objective
-    optm.objective = sum(Z)
+    optm.objective = sum(np.dot(vars[x], R[x]) for x in X)
 
     # Constraints
     for x in X:
@@ -62,8 +72,14 @@ if __name__ == '__main__':
         [[0.3, 0.3, 0.9, 0.1], [0.1, 0.5, 0  , 0.7], [0.2, 0  , 0.1, 0.1], [0.4, 0.2, 0  , 0.1]],
         [[0.1, 0.1, 0  , 0.8], [0.5, 0.1, 0.6, 0.1], [0.2, 0.7, 0.2, 0  ], [0.2, 0.1, 0.2, 0.1]]
     ])
+    costs = np.array([
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1]
+    ])
 
-    strategy = find_optimal_strategy(states, controls, kernels)
+    strategy = find_optimal_strategy(states, controls, costs, kernels)
     for control in sorted(strategy):
         print(control)
 
