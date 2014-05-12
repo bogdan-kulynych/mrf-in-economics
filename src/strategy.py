@@ -7,7 +7,8 @@ def find_optimal_strategy(states, controls, costs, kernels, solver=None):
     """
     :param states: Number of system states (X)
     :param controls: Number of system controls (U)
-    :param kernels: Transition kernels. Dimensionality X x X x U
+    :param сosts: Cost matrix |X| x |U|
+    :param kernels: Transition kernels. Dimensionality |X| x |X| x |U|
     """
     tolerance = 10e-15
 
