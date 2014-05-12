@@ -41,7 +41,7 @@ def find_optimal_strategy(states, controls, costs, kernels, solver=None):
     optm = LpProblem("Optimal strategy", sense=LpMinimize)
 
     # Variables (continuous in range [0, 1])
-    Z = [[LpVariable("({},{})".format(x, u), 0, 1) \
+    Z = [[LpVariable("z({},{})".format(x, u), 0, 1) \
                 for u in U] for x in X]
 
     # Objective
