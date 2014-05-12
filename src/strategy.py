@@ -39,28 +39,23 @@ def find_optimal_strategy(states, controls, costs, kernels, solver=None):
     # LP object
     optm = LpProblem("Optimal strategy", sense=LpMinimize)
 
-    # Variables (grouped by x)
-    vars = {x: [LpVariable("({},{})".format(x, u), 0, 1) \
-                for u in U] for x in X}
-
-    # Variables (flattened)
-    Z = []
-    for x in X:
-        Z.extend(vars[x])
+    # Variables (continuous in range [0, 1])
+    Z = [[LpVariable("({},{})".format(x, u), 0, 1) \
+                for u in U] for x in X]
 
     # Objective
-    optm.objective = sum(np.dot(vars[x], R[x]) for x in X)
+    optm.objective = sum(np.dot(Z[x], R[x]) for x in X)
 
     # Constraints
     for x in X:
-        cn = (sum(vars[x]) == sum(Q[y][x][u]*vars[y][u] for u in U for y in X))
+        cn = (sum(Z[x]) == sum(Q[y][x][u]*Z[y][u] for u in U for y in X))
         optm.add(cn)
-    cn = sum(vars[x][u] for u in U for x in X) == 1
+    cn = sum(Z[x][u] for u in U for x in X) == 1
     optm.add(cn)
 
     optm.solve(solver)
 
-    return [str(z) for z in Z if value(z) != 0]
+    return [(x, u) for u in U for x in X if value(Z[x][u]) != 0]
 
 
 if __name__ == '__main__':
@@ -80,6 +75,5 @@ if __name__ == '__main__':
     ])
 
     strategy = find_optimal_strategy(states, controls, costs, kernels)
-    for control in sorted(strategy):
-        print(control)
+    print(sorted(strategy))
 
