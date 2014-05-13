@@ -50,7 +50,7 @@
     \label{stochasticprocess}
     
     \item[Локальність.] Для всіх \(v \in V\) 
-    \[\Delta_v^{t+1} = \Delta_v^{t+1}(x^0, x^1, \ldots, x^t) = \Delta_v^{t+1}(x_{\tilde{N}(v)}^0, x_{\tilde{N}(v)}^1, \ldots, x_{\tilde{N}(v)}^t)\]
+    \[\Delta_v^{t} = \Delta_v^{t}(x^0, x^1, \ldots, x^t) = \Delta_v^{t}(x_{\tilde{N}(v)}^0, x_{\tilde{N}(v)}^1, \ldots, x_{\tilde{N}(v)}^t)\]
     \begin{align*}
     P(\xi_v^{t+1} = x_v\ &|\ \xi^0 = x^0, \Delta^0 = u^0,\ \ldots, \xi^t = x^t, \Delta^t = u^t) = \\
 	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^0 = x_{\tilde N(v)}^0, \Delta_{\tilde N(v)}^0 = u_{\tilde N(v)}^0,\ \ldots,\\ &\xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t)
@@ -65,7 +65,7 @@
     Усі агенти системи переходять у свій наступний стан одночасно. Це припущення узгоджується з інтерпретацією \(t\) як конкретного моменту в часі, однакового для всіх агентів.
 
 	\item[Повнота стану.] (припущення Маркова) Для всіх \(v \in V\)
-	\[\Delta_v^{t+1}(x_{\tilde{N}(v)}^0, x_{\tilde{N}(v)}^1, \ldots, x_{\tilde{N}(v)}^t) = \Delta_v^{t+1}(x_{\tilde{N}(v)}^t)\]
+	\[\Delta_v^{t}(x_{\tilde{N}(v)}^0, x_{\tilde{N}(v)}^1, \ldots, x_{\tilde{N}(v)}^t) = \Delta_v^{t}(x_{\tilde{N}(v)}^t)\]
 	\begin{align*}
 	P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^0 = x_{\tilde N(v)}^0, \Delta_{\tilde N(v)}^0 = u_{\tilde N(v)}^0,\ \ldots,\\ &\xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t) = \\
 	= P(\xi_v^{t+1} = x_v\ & |\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t)
@@ -130,7 +130,7 @@
 
 \begin{definition}
 Локальна стратегія називається марківською, якщо для всіх \(v \in V,\ t = 0, 1, \ldots\) 
-\[\Delta_v^{t+1} = \Delta_v^{t+1}(x_{\tilde{N}(v)}^t)\]
+\[\Delta_v^{t} = \Delta_v^{t}(x_{\tilde{N}(v)}^t)\]
 \end{definition}
 
 \begin{definition}
