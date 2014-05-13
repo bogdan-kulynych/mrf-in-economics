@@ -124,7 +124,7 @@
 	\item<2-> \textit{Локальність} взаємодії агентів відносно графа \(G\)
     \begin{align*}
     P(\xi_v^{t+1} = x_v\ &|\ \xi^0 = x^0, \Delta^0 = u^0,\ \ldots, \xi^t = x^t, \Delta^t = u^t) = \\
-	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^0 = x_{\tilde N(v)}^0, \Delta_{\tilde N(v)}^0 = u_{\tilde N(v)}^0,\ \ldots,\\ &\xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t)
+	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^0 = x_{\tilde N(v)}^0, \Delta_v^0 = u_v^0,\ \ldots,\\ &\xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_v^t = u_v^t)
 	\end{align*}
 	\item<3-> \textit{Локальність} рішень відносно графа \(G\)
 	\[\Delta_v^{t} = \Delta_v^{t}(x^0, x^1, \ldots, x^t) = \Delta_v^{t}(x_{\tilde{N}(v)}^0, x_{\tilde{N}(v)}^1, \ldots, x_{\tilde{N}(v)}^t)\]
@@ -138,7 +138,7 @@
 	\item \textit{Марковість} (повнота стану)
     \begin{align*}
     P(\xi_v^{t+1} = x_v\ &|\ \xi^0 = x^0, \Delta^0 = u^0,\ \ldots, \xi^t = x^t, \Delta^t = u^t) = \\
-	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t) \\
+	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_v^t = u_v^t) \\
 	&\Delta_v^{t} = \Delta_v^{t}(x_{\tilde{N}(v)}^t)
 	\end{align*}
 	\item \textit{Синхронність} взаємодії
@@ -168,7 +168,7 @@
 	
 	\begin{gather*}
 	P(\xi_D^{t+1} = x\ |\xi^0 = x^0, \Delta^0 = u^0, \ldots, \xi^t = x^t, \Delta^t = u^t) \\
-	= P(\xi_D^{t+1} = x\ |\ \xi_B = y, \Delta_B^t = u) \\
+	= P(\xi_D^{t+1} = x\ |\ \xi_D = d, \xi_B = b, \Delta_D^t = u) \\
 	\\
 	\Delta_D^{t} = \Delta_D^{t}(\xi_D^t,\ \xi_B^t)
 	\end{gather*}

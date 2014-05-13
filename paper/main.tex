@@ -53,7 +53,7 @@
     \[\Delta_v^{t} = \Delta_v^{t}(x^0, x^1, \ldots, x^t) = \Delta_v^{t}(x_{\tilde{N}(v)}^0, x_{\tilde{N}(v)}^1, \ldots, x_{\tilde{N}(v)}^t)\]
     \begin{align*}
     P(\xi_v^{t+1} = x_v\ &|\ \xi^0 = x^0, \Delta^0 = u^0,\ \ldots, \xi^t = x^t, \Delta^t = u^t) = \\
-	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^0 = x_{\tilde N(v)}^0, \Delta_{\tilde N(v)}^0 = u_{\tilde N(v)}^0,\ \ldots,\\ &\xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t)
+	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^0 = x_{\tilde N(v)}^0, \Delta_v^0 = u_v^0,\ \ldots,\\ &\xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_v^t = u_v^t)
 	\end{align*}
 	Локальність є природньою в контексті задачі, оскільки усі агенти, що не взаємодіють з даним відповідно до графу взаємодії \(G = (V, E)\), не чинять на нього безпосереднього впливу. Звідси, агентові для прийняття рішення достатньо знати стани тільки тих агентів, з якими він взаємодіє за графом \(G\).
 	
@@ -68,7 +68,7 @@
 	\[\Delta_v^{t}(x_{\tilde{N}(v)}^0, x_{\tilde{N}(v)}^1, \ldots, x_{\tilde{N}(v)}^t) = \Delta_v^{t}(x_{\tilde{N}(v)}^t)\]
 	\begin{align*}
 	P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^0 = x_{\tilde N(v)}^0, \Delta_{\tilde N(v)}^0 = u_{\tilde N(v)}^0,\ \ldots,\\ &\xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t) = \\
-	= P(\xi_v^{t+1} = x_v\ & |\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t)
+	= P(\xi_v^{t+1} = x_v\ & |\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_v^t = u_v^t)
 	\end{align*}
 	Припущення є природнім, оскільки для прийняття рішення про вибір технології найважливішим є стан сусідніх агентів у попередній момент часу, тоді як повною історією їх рішень можна знехтувати.
 	
@@ -149,7 +149,7 @@ Cтратегія називається стаціонарною, якщо дл
     \item (Локальність) Для всіх \(v \in V\)
 	\begin{align*}
     P(\xi_v^{t+1} = x_v\ &|\ \xi^0 = x^0, \Delta^0 = u^0,\ \ldots, \xi^t = x^t, \Delta^t = u^t) = \\
-	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t)
+	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_v^t = u_v^t)
 	\end{align*}
 	\item (Синхронність) Для всіх \(W \subset V\)
 	\[P(\xi^{t+1}_W = x_W\ |\ \xi^t = x^t, \Delta^t = u) = \prod_{w \in W} P(\xi^{t+1}_w = x_w\ |\ \xi^t = x^t, \Delta^t = u) \]
