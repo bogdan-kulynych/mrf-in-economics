@@ -1,0 +1,247 @@
+\documentclass[pdf]{beamer}
+
+%% Config
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{ukrainian}
+\setotherlanguage{english}
+\newfontfamily\cyrillicfont[Script=Cyrillic]{CMU Serif}
+\newfontfamily\cyrillicfontsf[Script=Cyrillic]{CMU Sans Serif}
+\newfontfamily\cyrillicfonttt[Script=Cyrillic]{CMU Typewriter Text}
+ 
+% Useful packages
+\usepackage{amssymb, amsmath, amsfonts, enumerate, float, indentfirst, graphicx}
+\usepackage[final]{listings}
+
+\usepackage{tikz}
+
+% Listings
+\lstdefinestyle{mystyle}{
+  language=python,
+  basicstyle=\ttfamily\small,
+  showstringspaces=false,
+  belowskip=1em,
+  aboveskip=1em
+%  frame=single,
+}
+\lstset{escapechar=@,style=mystyle}
+
+%% Title
+\title{Застосування марківських випадкових полів для моделювання економічних процесів з конкурентними технологіями}
+\date[2014]{14 травня 2014}
+\author{Богдан Кулинич}
+
+%% Theme
+\usetheme{boxes}
+\usecolortheme{seahorse}
+
+\setbeamercovered{transparent=20}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}{Задача}
+
+\begin{itemize}
+\item Система економічних агентів (підприємств), що взаємодіють між собою.
+\item У кожен момент часу підприємство обирає технологію виробництва
+\item Вибір технології впливає на стан системи
+\item Кожна технологія несе певні витрати (або приносить доходи) для підприємства
+\end{itemize}
+
+\begin{block}{ }
+Знайти стратегію вибору технологій, що мінімізує очікувані витрати (або максимізує очікувані доходи)
+\end{block}
+	
+\end{frame}
+
+
+\begin{frame}{Модель системи}{Формулювання}
+	
+	\begin{center}
+	\begin{tikzpicture}
+	  [scale=.2,auto=center,every node/.style={circle,fill=blue!20}]
+	  \node (a) at (0,10) {A};
+	  \node (b) at (8,10) {B};
+	  \node (d) at (16,10) {D};
+	  \node (c) at (4, 4) {C};
+
+	  \foreach \from/\to in {a/b, b/c, a/c, b/d}
+		\draw (\from) -- (\to);
+
+	\end{tikzpicture}
+	\end{center}
+	
+	\begin{itemize}
+	\item Множина економічних агентів \(V = \{A, B, C, D\}\)
+	\item Граф взаємодії агентів \(G = (V, E)\)
+	\end{itemize}
+	
+\end{frame}
+
+
+\begin{frame}{Модель системи}{Формулювання}
+	\begin{itemize}[<+->]
+	\item Стани \(X_v\)
+	\begin{gather*}
+		X_A = \{a_1, a_2, a_3\}, X_B = \{b_1, b_2\} \\ 
+		X_C = \{c_1, c_2\}, X_D = \{c_1, c_2, c_3\}
+	\end{gather*}
+	\(X = \times_{v \in V} X_v\) – системи. \(|X| = 3 \cdot 2 \cdot 2 \cdot 3 = 36 \)
+	\vspace{1em}
+	\item Можливі дії агентів (\textit{технології виробництва}) \(U_v\)
+	\begin{gather*}
+		U_A = \{\alpha_1, \alpha_2\}, U_B = \{\beta_1, \beta_2, \beta_3\} \\ 
+		U_C = \{\gamma_1, \gamma_2, \gamma_3, \gamma_4\}, U_D = \{\zeta_1, \zeta_2\}
+	\end{gather*}
+	\(U = \times_{v \in V} U_v\) – дії системи. \(|U| = 2 \cdot 3 \cdot 4 \cdot 2 = 48\)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Модель системи}{Формулювання}
+	\begin{itemize}
+	\item<1-> Еволюція системи відбувається у дискретному часі \(t = 0, 1, \ldots\)
+	\item<2-> Зміна станів відбувається стохастично. \\
+	\((\Omega, \mathcal{F}, P).\quad \xi = (\xi^t\ |\ t = 0, 1, \ldots).\quad \xi^t : \Omega \rightarrow X\)
+	\item<3-> Рішення про вибір технологій \(\Delta^t: X \rightarrow U \) \\
+	\item<3-> Cтаціонарні стратегії \(\delta = \{\Delta^t\ |\ t=0, 1, \ldots\}\)
+	\item<4-> Кожне рішення має витрати (або дохід) \(r: X \times U \rightarrow \mathbb{R} \)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Модель системи}{Основні припущення}
+\begin{block}{Означення}
+Нехай закритий окіл вершини графа \(G = (V, E)\): \(\tilde{N}(v) = \big\{w\ |\ \{v, w\} \in E\big\} \cup \{v\}\:\)
+\end{block}
+
+	\begin{itemize}
+	\item<2-> \textit{Локальність} взаємодії агентів відносно графа \(G\)
+    \begin{align*}
+    P(\xi_v^{t+1} = x_v\ &|\ \xi^0 = x^0, \Delta^0 = u^0,\ \ldots, \xi^t = x^t, \Delta^t = u^t) = \\
+	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^0 = x_{\tilde N(v)}^0, \Delta_{\tilde N(v)}^0 = u_{\tilde N(v)}^0,\ \ldots,\\ &\xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t)
+	\end{align*}
+	\item<3-> \textit{Локальність} рішень відносно графа \(G\)
+	\[\Delta_v^{t} = \Delta_v^{t}(x^0, x^1, \ldots, x^t) = \Delta_v^{t}(x_{\tilde{N}(v)}^0, x_{\tilde{N}(v)}^1, \ldots, x_{\tilde{N}(v)}^t)\]
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Модель системи}{Основні припущення}
+\begin{itemize}[<+->]
+	\item \textit{Марковість} (повнота стану)
+    \begin{align*}
+    P(\xi_v^{t+1} = x_v\ &|\ \xi^0 = x^0, \Delta^0 = u^0,\ \ldots, \xi^t = x^t, \Delta^t = u^t) = \\
+	= P(\xi_v^{t+1} = x_v\ &|\ \xi_{\tilde N(v)}^t = x_{\tilde N(v)}^t, \Delta_{\tilde N(v)}^t = u_{\tilde N(v)}^t) \\
+	&\Delta_v^{t} = \Delta_v^{t}(x_{\tilde{N}(v)}^t)
+	\end{align*}
+	\item \textit{Синхронність} взаємодії
+	\begin{align*}
+	&P(\xi^{t+1}_W = x_W\ |\ \xi^t = x^t, \Delta^t = u^t) = \\
+    = &\prod_{w \in W} P(\xi^{t+1}_w = x_w\ |\ \xi^t = x^t, \Delta^t = u^t)
+    \end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Модель системи}{Приклад}
+	\begin{center}
+	\begin{tikzpicture}
+	  [scale=.2,auto=center,every node/.style={circle,fill=blue!20}]
+	  \node (a) at (0,10) {A};
+	  \node (b) at (8,10) {B};
+	  \node (d) at (16,10) [fill=red!60] {D};
+	  \node (c) at (4, 4) {C};
+
+	  \foreach \from/\to in {a/b, b/c, a/c}
+		\draw (\from) -- (\to);
+	  \draw [red!50] (b) -- (d);
+
+	\end{tikzpicture}
+	\end{center}
+	
+	\begin{gather*}
+	P(\xi_D^{t+1} = x\ |\xi^0 = x^0, \Delta^0 = u^0, \ldots, \xi^t = x^t, \Delta^t = u^t) \\
+	= P(\xi_D^{t+1} = x\ |\ \xi_B = y, \Delta_B^t = u) \\
+	\\
+	\Delta_D^{t} = \Delta_D^{t}(\xi_D^t,\ \xi_B^t)
+	\end{gather*}
+\end{frame}
+
+
+\begin{frame}{Модель системи}{Задання}
+
+Однозначно задають систему:
+\begin{itemize}
+	\item \(R\) – матриця витрат, \(R_{ij} = r(x_i, u_j)\). Розмірність \(|X| \times |U| = 36 \times 48\)
+	\item \(Q^k\) – матриці перехідних імовірностей. 
+	\[Q_{ij}^k = P(\xi^{t+1} = x_j\ |\ \xi^t = x_i, \Delta^t = u_k)\]
+	Розмірність кожної \(Q^k\) – \(|X| \times |X| = 36 \times 36\). Кількість \(Q^k\) – \(|U| = 48\)
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Модель системи}{Марківське випадкове поле}
+\begin{block}{Означення}
+Такий керований процес \((\xi, \delta)\) відносно графа взаємодії \(G = (V, E)\) називається \textit{керованим марківським випадковим полем з дискретним часом}.
+\end{block}
+\begin{itemize}
+\item<2->{За стаціонарності стратегій, таке поле також є однорідним марківським ланцюгом}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Знаходження оптимальної стратегії}{Формулювання}
+	\begin{itemize}[<+->]
+	\item Математичне сподівання витрат для стратегії \(\delta\):
+	\[ C_T^{\delta} = E\left[\frac{1}{T+1}\sum_{t=0}^T r(\xi^t, \Delta^t)\right] \]
+	\item Оптимальна стратегія \(\delta^*\) мінімізує \(C_T^{\delta}(y)\) при \(T\rightarrow\infty\) для всіх \(y \in X\):
+	\begin{gather*}
+	R_y^\delta = \lim\limits_{T \rightarrow \infty} \sup C_T^{\delta}(y) \\
+	\delta^* = R_y^{\delta^*},\ y \in X
+	\end{gather*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Знаходження оптимальної стратегії}{Задача лінійного програмування}
+
+Для даного керованого марківського поля \(\delta^*\) можна знайти, розв’язавши задачу ЛП:
+
+\[\min \sum_{x \in X} \sum_{u \in U} r(x, u)\ z_{xu}\]
+З обмеженнями:
+\begin{gather*}
+\sum_{u \in U} z_{xu} = \sum_{y \in X} \sum_{u \in U} Q_{yx}^u\,z_{yu},\ x \in X \\
+\sum_{x \in X} \sum_{u \in U} z_{xu} = 1 \\
+z_{xu} \geq 0,\ x \in X, u \in U
+\end{gather*}
+
+\end{frame}
+
+
+\begin{frame}{Знаходження оптимальної стратегії}{Інтерпретація}
+Стратегія \(\delta^*\) задається так:
+
+\begin{itemize}
+	\item Якщо \(z_{xu} \neq 0\), то в стані \(x\) слід обирати дію \(u\)
+	\item Якщо \(z_{xu} = 0\), то в стані \(x\) \textit{не слід} обирати дію \(u\)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Fin}
+Програмна реалізація, та весь код курсової роботи:
+
+\begin{center}
+	\url{github.com/bogdan-kulynych/mrf-in-economics}
+\end{center}
+
+\end{frame}
+
+\end{document}
